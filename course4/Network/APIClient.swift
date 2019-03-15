@@ -18,6 +18,7 @@ enum APIClient {
     }
     
     case search(repository: String, language: String, order: ListOrder)
+    case authenticate(username: String, password: String)
 }
 
 extension APIClient {
@@ -34,6 +35,8 @@ extension APIClient {
         switch self {
             case .search:
                 return "/search/repositories"
+            case .authenticate:
+                return "/user"
         }
     }
     
@@ -41,6 +44,26 @@ extension APIClient {
         switch self {
         default:
             return "GET"
+        }
+    }
+    
+    private var defaultHeaders: [String: String] {
+        return [
+            "Content-Type": "application/json",
+            "Accept": "application/vnd.github.v3+json"
+        ]
+    }
+    
+    private var headers: [String: String] {
+        switch self {
+        case .authenticate(let username, let password):
+            
+            let data = "\(username):\(password)".data(using: .utf8)
+            let encodedCredentials = data?.base64EncodedString() ?? ""
+            return ["Authorization": "Basic \(encodedCredentials)"]
+            
+        default:
+            return defaultHeaders
         }
     }
     
@@ -65,6 +88,8 @@ extension APIClient {
                 "sort": "stars",
                 "order": order
             ]
+        default:
+            break
         }
         
         for (key,value) in parameters {
@@ -88,6 +113,7 @@ extension APIClient {
         
         var request = URLRequest(url: url)
         request.httpMethod = HTTPmethod
+        request.allHTTPHeaderFields = headers
         return request
         
     }

@@ -21,6 +21,7 @@
 		0B4D05182227A48500F732CF /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4D05172227A48500F732CF /* APIClient.swift */; };
 		0B4D051A2227A4A000F732CF /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4D05192227A4A000F732CF /* NetworkManager.swift */; };
 		0B5F1340223C182800749A0C /* ViewRepositoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5F133F223C182800749A0C /* ViewRepositoryViewController.swift */; };
+		0B5F1342223C34DF00749A0C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5F1341223C34DF00749A0C /* User.swift */; };
 		0B9E55DC222632A3003B02D3 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9E55DB222632A3003B02D3 /* SearchViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +42,7 @@
 		0B4D05172227A48500F732CF /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		0B4D05192227A4A000F732CF /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		0B5F133F223C182800749A0C /* ViewRepositoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRepositoryViewController.swift; sourceTree = "<group>"; };
+		0B5F1341223C34DF00749A0C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0B9E55DB222632A3003B02D3 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -111,6 +113,7 @@
 			children = (
 				0B434ED82239821F000DA22A /* Repository.swift */,
 				0B434EDA22398266000DA22A /* RepositoryAuthor.swift */,
+				0B5F1341223C34DF00749A0C /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -237,6 +240,7 @@
 				0B4D051A2227A4A000F732CF /* NetworkManager.swift in Sources */,
 				0B434ED92239821F000DA22A /* Repository.swift in Sources */,
 				0B434ED422397F88000DA22A /* RepositoryTableViewCell.swift in Sources */,
+				0B5F1342223C34DF00749A0C /* User.swift in Sources */,
 				0B027C972215F1E70022D07F /* LoginViewController.swift in Sources */,
 				0B434ED622398049000DA22A /* RepositoriesViewController.swift in Sources */,
 				0B027C812215EC9F0022D07F /* AppDelegate.swift in Sources */,

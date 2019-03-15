@@ -41,7 +41,7 @@ final class NetworkManager {
     
     init() {}
     
-    func performSearchRepositories(_ api: APIClient, _ completion: @escaping (Result<[Repository], FetchError>) -> Void) {
+    func searchForRepositories(_ api: APIClient, _ completion: @escaping (Result<[Repository], FetchError>) -> Void) {
         
         guard let request = api.request else {
             completion(.failture(.badRequest))
@@ -67,6 +67,34 @@ final class NetworkManager {
             
             completion(.success(result.items))
 
+        }.resume()
+    }
+    
+    func getUser(_ api: APIClient, _ completion: @escaping (Result<User, FetchError>) -> Void) {
+        
+        guard let request = api.request else {
+            completion(.failture(.badRequest))
+            return
+        }
+
+        session.dataTask(with: request) { (data, response, error) in
+
+            if let error = error {
+                completion(.failture(.networkError(error)))
+                return
+            }
+
+            guard let data = data else {
+                completion(.failture(.noData))
+                return
+            }
+
+            guard let result = try? JSONDecoder().decode(User.self, from: data) else {
+                completion(.failture(.decodingError))
+                return
+            }
+
+            completion(.success(result))
         }.resume()
     }
 }

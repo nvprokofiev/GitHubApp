@@ -26,6 +26,7 @@ class LoginViewController: UIViewController {
     
     
     func setupViews(){
+        loginButton.isEnabled = false
         loadLogo()
     }
     
@@ -36,15 +37,31 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loginButtonTapped(_ sender: Any) {
-        if usernameTextField.text != "" && passwordTextField.text != nil {
-            
-        }
+        getUser()
+    }
+    
+    private func getUser(){
         
-        self.navigationController?.pushViewController(SearchViewController(), animated: true)
+        guard let username = usernameTextField.text, let password = passwordTextField.text else { return }
+        
+        NetworkManager.shared.getUser(.authenticate(username: username, password: password)){ [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let user):
+                    self?.navigationController?.pushViewController(SearchViewController(user), animated: true)
+                case .failture(let error):
+                    self?.presentAlert(with: "Authentication Error", message: error.description)
+                }
+            }
+        }
     }
 }
 
 extension LoginViewController: UITextFieldDelegate {
+    
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
+        loginButton.isEnabled = passwordTextField.text != "" && usernameTextField.text != ""
+    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == usernameTextField {

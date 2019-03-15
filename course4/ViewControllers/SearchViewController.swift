@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class SearchViewController: UIViewController {
     
@@ -19,7 +20,6 @@ class SearchViewController: UIViewController {
     
     private var usernameLabel: UILabel = {
         var label = UILabel()
-        label.text = "Hello"
         label.sizeToFit()
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -79,10 +79,20 @@ class SearchViewController: UIViewController {
         return activityIndicator
     }()
     
+    private var user: User
+    
+    init(_ user: User) {
+        self.user = user
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
-        self.view.backgroundColor = .white
+        setupViews()
         addSubviews()
         setupConstraints()
     }
@@ -96,6 +106,16 @@ class SearchViewController: UIViewController {
         super.viewWillLayoutSubviews()
         avatarImageView.layer.cornerRadius = avatarImageView.frame.width / 2
         avatarImageView.layer.masksToBounds = true
+    }
+    
+    private func setupViews() {
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        self.view.backgroundColor = .white
+        
+        usernameLabel.text = "Hello \(user.login)"
+        guard let url = URL(string: user.avatarUrl) else { return }
+        avatarImageView.kf.indicatorType = .activity
+        avatarImageView.kf.setImage(with: url)
     }
     
     private func addSubviews() {
@@ -145,7 +165,7 @@ class SearchViewController: UIViewController {
         
         let order: APIClient.ListOrder = orderSegment.selectedSegmentIndex == 0 ? .acs : .desc
         
-        NetworkManager.shared.performSearchRepositories(.search(repository: repositoryNameTextField.text ?? "",
+        NetworkManager.shared.searchForRepositories(.search(repository: repositoryNameTextField.text ?? "",
                                                                 language: languageTextField.text ?? "",
                                                                 order: order))
         { [unowned self] result in
@@ -161,7 +181,7 @@ class SearchViewController: UIViewController {
                     self.navigationController?.pushViewController(vc, animated: true)
                     
                 case .failture(let error):
-                    self.presentAlert(with: "Fetching Error", message: error.description, actions: [UIAlertAction(title: "Ok", style: .default, handler: nil)])
+                    self.presentAlert(with: "Fetching Error", message: error.description)
                 }
             }
         }
