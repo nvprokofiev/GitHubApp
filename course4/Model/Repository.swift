@@ -18,7 +18,7 @@ struct Repository: Decodable {
         case name
         case description
         case author = "owner"
-        case urlString = "url"
+        case urlString = "html_url"
     }
     
     init(from decoder: Decoder) throws {

@@ -59,8 +59,6 @@ final class NetworkManager {
                 completion(.failture(.noData))
                 return
             }
-            
-            
 
             guard let result = try? JSONDecoder().decode(GitHubRepositoryResponse.self, from: data) else {
                 completion(.failture(.decodingError))

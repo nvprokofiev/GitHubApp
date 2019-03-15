@@ -45,4 +45,10 @@ extension RepositoriesViewController: UITableViewDelegate, UITableViewDataSource
         cell.configureCell(for: repositories[indexPath.row])
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let urlString = repositories[indexPath.row].urlString
+        navigationController?.pushViewController(ViewRepositoryViewController(urlString: urlString), animated: true)
+    }
 }
