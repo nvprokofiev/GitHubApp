@@ -19,7 +19,11 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+        usernameTextField.delegate = self
+        passwordTextField.delegate = self
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
     }
+    
     
     func setupViews(){
         loadLogo()
@@ -32,6 +36,20 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loginButtonTapped(_ sender: Any) {
+        if usernameTextField.text != "" && passwordTextField.text != nil {
+            
+        }
+        
         self.navigationController?.pushViewController(SearchViewController(), animated: true)
+    }
+}
+
+extension LoginViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == usernameTextField {
+            passwordTextField.becomeFirstResponder()
+        }
+        return false
     }
 }

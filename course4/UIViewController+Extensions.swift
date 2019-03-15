@@ -19,4 +19,8 @@ extension UIViewController {
         }
         self.present(alert, animated: true)
     }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }

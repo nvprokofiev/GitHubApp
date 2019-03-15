@@ -20,6 +20,7 @@
 		0B434EDD22399170000DA22A /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B434EDC22399170000DA22A /* UIViewController+Extensions.swift */; };
 		0B4D05182227A48500F732CF /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4D05172227A48500F732CF /* APIClient.swift */; };
 		0B4D051A2227A4A000F732CF /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4D05192227A4A000F732CF /* NetworkManager.swift */; };
+		0B5F1340223C182800749A0C /* ViewRepositoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5F133F223C182800749A0C /* ViewRepositoryViewController.swift */; };
 		0B9E55DC222632A3003B02D3 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9E55DB222632A3003B02D3 /* SearchViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +40,7 @@
 		0B434EDC22399170000DA22A /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		0B4D05172227A48500F732CF /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		0B4D05192227A4A000F732CF /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		0B5F133F223C182800749A0C /* ViewRepositoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRepositoryViewController.swift; sourceTree = "<group>"; };
 		0B9E55DB222632A3003B02D3 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -74,6 +76,7 @@
 		0B027C7F2215EC9F0022D07F /* course4 */ = {
 			isa = PBXGroup;
 			children = (
+				0B5F133E223C17C900749A0C /* ViewControllers */,
 				0B434ED72239820D000DA22A /* Model */,
 				0B434ED222397F6D000DA22A /* Views */,
 				0B4D05162227A46900F732CF /* Network */,
@@ -82,9 +85,6 @@
 				0B027C872215ECA00022D07F /* Assets.xcassets */,
 				0B027C892215ECA00022D07F /* LaunchScreen.storyboard */,
 				0B027C8C2215ECA00022D07F /* Info.plist */,
-				0B027C962215F1E70022D07F /* LoginViewController.swift */,
-				0B9E55DB222632A3003B02D3 /* SearchViewController.swift */,
-				0B434ED522398049000DA22A /* RepositoriesViewController.swift */,
 				0B434EDC22399170000DA22A /* UIViewController+Extensions.swift */,
 			);
 			path = course4;
@@ -122,6 +122,17 @@
 				0B4D05192227A4A000F732CF /* NetworkManager.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		0B5F133E223C17C900749A0C /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				0B027C962215F1E70022D07F /* LoginViewController.swift */,
+				0B9E55DB222632A3003B02D3 /* SearchViewController.swift */,
+				0B434ED522398049000DA22A /* RepositoriesViewController.swift */,
+				0B5F133F223C182800749A0C /* ViewRepositoryViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -220,6 +231,7 @@
 			files = (
 				0B4D05182227A48500F732CF /* APIClient.swift in Sources */,
 				0B434EDB22398266000DA22A /* RepositoryAuthor.swift in Sources */,
+				0B5F1340223C182800749A0C /* ViewRepositoryViewController.swift in Sources */,
 				0B434EDD22399170000DA22A /* UIViewController+Extensions.swift in Sources */,
 				0B9E55DC222632A3003B02D3 /* SearchViewController.swift in Sources */,
 				0B4D051A2227A4A000F732CF /* NetworkManager.swift in Sources */,
@@ -374,8 +386,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2RDEFER5FF;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -398,8 +410,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2RDEFER5FF;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
