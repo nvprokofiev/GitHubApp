@@ -8,6 +8,7 @@
 
 import UIKit
 import Kingfisher
+import LocalAuthentication
 
 class LoginViewController: UIViewController {
 
@@ -15,15 +16,18 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
-
+    
+    private var authController: AuthController!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         usernameTextField.delegate = self
         passwordTextField.delegate = self
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
+        authController = AuthController()
+        authenticateUser()
     }
-    
     
     func setupViews(){
         loginButton.isEnabled = false
@@ -37,21 +41,33 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loginButtonTapped(_ sender: Any) {
-        getUser()
+        guard let username = usernameTextField.text, let password = passwordTextField.text else { return }
+        getUser(with: username, password)
     }
     
-    private func getUser(){
-        
-        guard let username = usernameTextField.text, let password = passwordTextField.text else { return }
-        
+    private func getUser(with username: String, _ password: String){
         NetworkManager.shared.getUser(.authenticate(username: username, password: password)){ [weak self] result in
             DispatchQueue.main.async {
+                
                 switch result {
                 case .success(let user):
+                    self?.authController.store(username, password)
                     self?.navigationController?.pushViewController(SearchViewController(user), animated: true)
+                    
                 case .failture(let error):
                     self?.presentAlert(with: "Authentication Error", message: error.description)
                 }
+            }
+        }
+    }
+    
+    private func authenticateUser() {
+        authController.auth { [unowned self] result in
+            switch result {
+            case .success(let credentials):
+                self.getUser(with: credentials.username, credentials.password)
+            case .failed(let error):
+                self.presentAlert(with: "Authentication Error", message: error.localizedDescription)
             }
         }
     }
